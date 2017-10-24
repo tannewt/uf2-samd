@@ -30,4 +30,9 @@
 #define BOOT_GCLK_ID_CORE                 SERCOM0_GCLK_ID_CORE
 #define BOOT_GCLK_ID_SLOW                 SERCOM0_GCLK_ID_SLOW
 
+#define DBL_TAP_PTR ((volatile uint32_t *)0x2002FFFCul)
+
+#define DBL_TAP_MAGIC 0x07738135 // Randomly selected, adjusted to have first and last bit set
+#define DBL_TAP_MAGIC_QUICK_BOOT 0x07738135
+
 #endif

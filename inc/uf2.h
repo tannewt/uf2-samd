@@ -217,14 +217,22 @@ void padded_memcpy(char *dst, const char *src, int len);
 // Unlike for ordinary applications, our link script doesn't place the stack at the bottom
 // of the RAM, but instead after all allocated BSS.
 // In other words, this word should survive reset.
+#ifndef DBL_TAP_PTR
 #ifdef SAMD21
 #define DBL_TAP_PTR ((volatile uint32_t *)(HMCRAMC0_ADDR + HMCRAMC0_SIZE - 4))
 #endif
 #ifdef SAMD51
 #define DBL_TAP_PTR ((volatile uint32_t *)(HSRAM_ADDR + HSRAM_SIZE - 4))
 #endif
+#endif
+
+#ifndef DBL_TAP_MAGIC
 #define DBL_TAP_MAGIC 0xf01669ef // Randomly selected, adjusted to have first and last bit set
+#endif
+
+#ifndef DBL_TAP_MAGIC_QUICK_BOOT
 #define DBL_TAP_MAGIC_QUICK_BOOT 0xf02669ef
+#endif
 
 #if USE_SINGLE_RESET
 #define SINGLE_RESET() (*((uint32_t *)0x20B4) == 0x87eeb07c)
